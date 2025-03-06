@@ -1,10 +1,12 @@
 package com.flasska.petstat.presentation.navigation
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.flasska.petstat.presentation.list_of_devices_screen.ListOfDevicesScreenDrawer
 
 @Composable
@@ -15,21 +17,23 @@ fun AppNavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.ListOfDevices.route,
+        startDestination = Screen.ListOfDevices,
         modifier = modifier
     ) {
-        composable(Screen.ListOfDevices.route) {
+        composable<Screen.ListOfDevices> {
             ListOfDevicesScreenDrawer(
                 navigateTo = navController::navigate
             )
         }
 
-        composable(Screen.AddDevice.route) {
+        composable<Screen.AddDevice> {
 
         }
 
-        composable(Screen.DeviceStatistic.route) {
+        composable<Screen.DeviceStatistic> {
 
+            val args = it.toRoute<Screen.DeviceStatistic>()
+            Text(args.uid)
         }
     }
 }

@@ -31,16 +31,40 @@ class ListOfDevicesVM(
         when (event) {
             ListOfDevicesEvent.AddDevice -> addDevice()
             is ListOfDevicesEvent.OnDeviceClick -> onDeviceClick(event)
-            is ListOfDevicesEvent.RemoveDevice -> TODO()
+            is ListOfDevicesEvent.OnDeviceReconnect -> onDeviceReconnect(event)
+            is ListOfDevicesEvent.OnDeviceDelete -> onDeviceDelete(event)
+            ListOfDevicesEvent.ShowPermissionDialog -> showPermissionDialog()
         }
     }
 
+    private fun showPermissionDialog() {
+        // Логика для отображения диалога
+    }
+
     private fun addDevice() {
-        navigateTo(Screen.AddDevice)
+        if (state.value.devices.isNotEmpty()) {
+            navigateTo(Screen.AddDevice)
+        }
     }
 
     private fun onDeviceClick(event: ListOfDevicesEvent.OnDeviceClick) {
-        navigateTo(Screen.DeviceStatistic(event.uid))
+        val device = state.value.devices.find { it.id == event.uid }
+        if (device != null) {
+            navigateTo(Screen.DeviceStatistic(uid = device.id))
+        }
+    }
+
+    private fun onDeviceDelete(event: ListOfDevicesEvent.OnDeviceDelete) {
+        _state.update { currentState ->
+            currentState.copy(
+                devices = currentState.devices.filter { it.id != event.uid }
+            )
+        }
+    }
+
+    private fun onDeviceReconnect(event: ListOfDevicesEvent.OnDeviceReconnect) {
+        // Заглушка для перезагрузки устройства
+        println("Перезагрузка устройства с ID: ${event.uid}")
     }
 
     class FactoryWrapper(

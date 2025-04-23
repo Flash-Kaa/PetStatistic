@@ -22,6 +22,7 @@ fun ListOfDevicesScreenDrawer(
 
     ListOfDevicesScreen(
         screenEvent = viewModel::onEvent,
-        screenState = state
+        screenState = state,
+        navigateTo = navigateTo
     )
 }

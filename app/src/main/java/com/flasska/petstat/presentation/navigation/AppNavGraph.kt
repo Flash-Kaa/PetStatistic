@@ -7,7 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.flasska.petstat.presentation.device_statistic_screen.DeviceStatisticScreenDrawer
 import com.flasska.petstat.presentation.list_of_devices_screen.ListOfDevicesScreenDrawer
+import com.flasska.petstat.presentation.permissions.PermissionManagementScreen
 
 @Composable
 fun AppNavGraph(
@@ -27,13 +29,25 @@ fun AppNavGraph(
         }
 
         composable<Screen.AddDevice> {
-
+            Text("Add Device")
         }
 
         composable<Screen.DeviceStatistic> {
-
             val args = it.toRoute<Screen.DeviceStatistic>()
-            Text(args.uid)
+            DeviceStatisticScreenDrawer(
+                deviceId = args.uid,
+                navigateTo = navController::navigate
+            )
+        }
+
+        composable<Screen.PermissionManagement> {
+            PermissionManagementScreen(
+                onPermissionsUpdated = {
+                },
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

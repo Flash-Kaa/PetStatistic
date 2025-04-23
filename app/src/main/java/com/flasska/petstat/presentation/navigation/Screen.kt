@@ -14,4 +14,7 @@ sealed interface Screen {
     data class DeviceStatistic(
         val uid: String
     ) : Screen
+
+    @Serializable
+    data object PermissionManagement : Screen
 }

@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.flasska.petstat.presentation.ble_connect.DeviceConnectScreenDrawer
 import com.flasska.petstat.presentation.device_statistic_screen.DeviceStatisticScreenDrawer
 import com.flasska.petstat.presentation.list_of_devices_screen.ListOfDevicesScreenDrawer
 import com.flasska.petstat.presentation.permissions.PermissionManagementScreen
@@ -29,7 +30,7 @@ fun AppNavGraph(
         }
 
         composable<Screen.AddDevice> {
-            Text("Add Device")
+            DeviceConnectScreenDrawer(navController::navigate)
         }
 
         composable<Screen.DeviceStatistic> {

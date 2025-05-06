@@ -6,11 +6,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.flasska.petstat.appComponent
+import com.flasska.petstat.presentation.navigation.Screen
 
 @Composable
 fun DeviceStatisticScreenDrawer(
     deviceId: String,
-    navigateTo: (com.flasska.petstat.presentation.navigation.Screen) -> Unit
+    navigateTo: (Screen) -> Unit
 ) {
     val context = LocalContext.current
     val viewModel = viewModel<DeviceStatisticVM>(

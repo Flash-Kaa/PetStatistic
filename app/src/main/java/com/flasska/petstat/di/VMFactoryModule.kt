@@ -1,6 +1,8 @@
 package com.flasska.petstat.di
 
 import com.flasska.petstat.domain.usecases.GetDevicesUseCase
+import com.flasska.petstat.presentation.ble_connect.BleManager
+import com.flasska.petstat.presentation.ble_connect.DeviceConnectViewModel
 import com.flasska.petstat.presentation.list_of_devices_screen.ListOfDevicesVM
 import dagger.Module
 import dagger.Provides
@@ -13,6 +15,14 @@ class VMFactoryModule {
     fun provideListOfDevicesViewModelFactoryWrapper(
         getDevicesUseCase: GetDevicesUseCase
     ) = ListOfDevicesVM.FactoryWrapper(
-        getDevicesUseCase = getDevicesUseCase
+        getDevicesUseCase = getDevicesUseCase,
+    )
+
+    @Provides
+    @Singleton
+    fun provideDeviceConnectViewModel(
+        bluetoothManager: BleManager,
+    ) : DeviceConnectViewModel.FactoryWrapper = DeviceConnectViewModel.FactoryWrapper(
+        bluetoothManager = bluetoothManager,
     )
 }
